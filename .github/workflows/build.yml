@@ -23,4 +23,3 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
           image-name: zipline_docker # Provide Docker image name
           image-tag: head # Provide Docker image tag
-          dockerfile: .devcontainer/Dockerfile

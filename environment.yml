@@ -1,7 +1,6 @@
 name: zipline
 channels:
   - quantopian
-  - zipline
   - defaults
 dependencies:
   - pip:

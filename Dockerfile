@@ -5,8 +5,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 RUN conda config --set channel_priority strict
 COPY environment.yml* noop.txt /tmp/conda-tmp/
 RUN conda env update --help
-RUN conda create -n py36 python=3.6 quantopian zipline
-
+RUN conda create -n algo_trading python=3.6
+RUN conda install -n algo_trading -c quantopian zipline
 # RUN conda install -c quantopian zipline -n algo_trading
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

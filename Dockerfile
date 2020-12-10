@@ -42,6 +42,8 @@ SHELL ["conda", "run", "-n", "algo_trading", "/bin/bash", "-c"]
 RUN conda info --envs
 RUN python --version
 RUN conda config --set channel_priority strict
+# do zipline install manually
+RUN conda install -c conda-forge zipline
 # COPY environment.yml* noop.txt /tmp/conda-tmp/
 # RUN conda install -n algo_trading -c quantopian zipline
 # RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \

@@ -1,10 +1,5 @@
 FROM continuumio/anaconda3
 
-RUN conda create -n algo_trading python=3.6.9 anaconda
-# Activate the environment, and make sure it's activated:
-# Make RUN commands use the new environment:
-SHELL ["conda", "run", "-n", "algo_trading", "/bin/bash", "-c"]
-RUN conda info --envs
 RUN apt-get install -y curl grep sed dpkg && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \
     curl -L "https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini_${TINI_VERSION}.deb" > tini.deb && \
@@ -39,6 +34,12 @@ RUN if [ "$INSTALL_NODE" = "true" ]; then bash /tmp/library-scripts/node-debian.
 
 # Copy environment.yml (if found) to a temp locaition so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
+
+RUN conda create -n algo_trading python=3.6.9 anaconda
+# Activate the environment, and make sure it's activated:
+# Make RUN commands use the new environment:
+SHELL ["conda", "run", "-n", "algo_trading", "/bin/bash", "-c"]
+RUN conda info --envs
 RUN conda config --set channel_priority strict
 COPY environment.yml* noop.txt /tmp/conda-tmp/
 RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \

@@ -3,7 +3,7 @@ FROM continuumio/anaconda3
 RUN conda create -n algo_trading python=3.6.9 anaconda
 # Activate the environment, and make sure it's activated:
 # Make RUN commands use the new environment:
-SHELL ["conda", "activate", "algo_trading", "/bin/bash", "-c"]
+SHELL ["conda", "run", "-n", "algo_trading", "/bin/bash", "-c"]
 RUN conda info --envs
 RUN apt-get install -y curl grep sed dpkg && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \

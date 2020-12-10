@@ -2,4 +2,6 @@ name: zipline
 channels:
   - quantopian
   - defaults
+dependencies:
+  - python=3.6.9=h265db76_0
 prefix: /home/vscode/.conda/envs/zipline

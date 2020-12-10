@@ -4,7 +4,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 RUN conda config --set channel_priority strict
 COPY environment.yml* noop.txt /tmp/conda-tmp/
-RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update  --strict-channel-priority --force-reinstall -n base -f /tmp/conda-tmp/environment.yml; fi \
+RUN conda env update --help
+RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update --strict-channel-priority -n base -f /tmp/conda-tmp/environment.yml; fi \
     && rm -rf /tmp/conda-tmp
 
 # [Optional] Uncomment this section to install additional OS packages.

@@ -2,9 +2,4 @@ name: zipline
 channels:
   - quantopian
   - defaults
-dependencies:
-  - pip:
-    - beautifulsoup4==4.9.3
-    - soupsieve==2.0.1
-    - yahoofinancials==1.6
 prefix: /home/vscode/.conda/envs/zipline

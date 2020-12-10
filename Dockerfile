@@ -7,6 +7,7 @@ COPY environment.yml* noop.txt /tmp/conda-tmp/
 RUN conda env update --help
 RUN conda create -n algo_trading python=3.6
 RUN conda install -n algo_trading -c quantopian zipline
+
 # RUN conda install -c quantopian zipline -n algo_trading
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

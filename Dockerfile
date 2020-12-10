@@ -1,6 +1,7 @@
 FROM continuumio/anaconda3
 RUN conda create -n algo_trading python=3.6.9 anaconda
-RUN conda activate algo_trading
+# Activate the environment, and make sure it's activated:
+RUN echo "conda activate algo_trading" > ~/.bashrc
 RUN conda info --envs
 RUN apt-get install -y curl grep sed dpkg && \
     TINI_VERSION=`curl https://github.com/krallin/tini/releases/latest | grep -o "/v.*\"" | sed 's:^..\(.*\).$:\1:'` && \

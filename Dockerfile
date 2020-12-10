@@ -4,7 +4,8 @@ FROM mcr.microsoft.com/vscode/devcontainers/anaconda:dev-3
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 RUN conda config --set channel_priority strict
 COPY environment.yml* noop.txt /tmp/conda-tmp/
-RUN if [ -f "environment.yml" ]; then conda env update base -f environment.yml && rm environment.yml*; fi
+RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
+    && rm -rf /tmp/conda-tmp
 # RUN conda install -c quantopian zipline -n algo_trading
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

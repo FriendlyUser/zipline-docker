@@ -35,15 +35,16 @@ RUN if [ "$INSTALL_NODE" = "true" ]; then bash /tmp/library-scripts/node-debian.
 # Copy environment.yml (if found) to a temp locaition so we update the environment. Also
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 
-RUN conda create -n algo_trading python=3.6.9 anaconda
+RUN conda create -n algo_trading python=3.6.9
 # Activate the environment, and make sure it's activated:
 # Make RUN commands use the new environment:
 SHELL ["conda", "run", "-n", "algo_trading", "/bin/bash", "-c"]
 RUN conda info --envs
 RUN conda config --set channel_priority strict
 COPY environment.yml* noop.txt /tmp/conda-tmp/
-RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
-    && rm -rf /tmp/conda-tmp
+RUN conda install -n algo_trading -c quantopian zipline
+# RUN if [ -f "/tmp/conda-tmp/environment.yml" ]; then /opt/conda/bin/conda env update -n base -f /tmp/conda-tmp/environment.yml; fi \
+#     && rm -rf /tmp/conda-tmp
 # RUN conda install -c quantopian zipline -n algo_trading
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
